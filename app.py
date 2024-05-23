@@ -75,10 +75,10 @@ def segment_visual_elements(uploaded_image):
         x, y, w, h = cv2.boundingRect(contour)
         object_image = open_cv_image[y:y+h, x:x+w]
         cv2.imwrite(f"segmented_object_{idx}.png", object_image)
-    
+        st.image(object_image, caption='Segmented Image', use_column_width=True)
+        cv2.rectangle(open_cv_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
     st.image(open_cv_image, caption='Segmented Image', use_column_width=True)
-
-
 def main():
     """Main function to run the Streamlit app."""
     st.title('Image Text and Visual Element Extractor')
