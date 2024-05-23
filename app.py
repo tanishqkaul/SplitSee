@@ -55,7 +55,7 @@ def extract_texts(texts):
         st.write(f"Vertices: {vertices}")
 
 def segment_visual_elements(uploaded_image):
-    """Segment and display visual elements from the uploaded image.
+    """Segment and save visual elements from the uploaded image as separate images.
     
     Args:
         uploaded_image: The uploaded image file.
@@ -69,11 +69,15 @@ def segment_visual_elements(uploaded_image):
                                    cv2.THRESH_BINARY_INV, 11, 2)
     
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    for contour in contours:
+    
+    # Save each segmented object as a separate image
+    for idx, contour in enumerate(contours):
         x, y, w, h = cv2.boundingRect(contour)
-        cv2.rectangle(open_cv_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        object_image = open_cv_image[y:y+h, x:x+w]
+        cv2.imwrite(f"segmented_object_{idx}.png", object_image)
     
     st.image(open_cv_image, caption='Segmented Image', use_column_width=True)
+
 
 def main():
     """Main function to run the Streamlit app."""
