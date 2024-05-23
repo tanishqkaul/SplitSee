@@ -1,5 +1,4 @@
-# Virtual environment
-venv/
+venv
 
 # IDE and editor files
 # Choose the relevant ones based on your IDE/editor
