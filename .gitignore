@@ -21,3 +21,5 @@ test/  # Or a specific test directory
 # IDE or notebook specific generated files
 # (adjust extensions based on your IDE/notebook)
 *.ipynb_checkpoints
+
+splitsee.json
