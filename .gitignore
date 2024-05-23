@@ -1,0 +1,23 @@
+# Virtual environment
+venv/
+
+# IDE and editor files
+# Choose the relevant ones based on your IDE/editor
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# System or build files
+*.pyc
+*.pyo
+__pycache__/
+
+# Temporary test, cache or output files
+*.txt  # Adjust extensions if needed (e.g., *.log)
+*.log
+test/  # Or a specific test directory
+
+# IDE or notebook specific generated files
+# (adjust extensions based on your IDE/notebook)
+*.ipynb_checkpoints
