@@ -1,13 +1,17 @@
 import os
-from google.cloud import vision
-from PIL import Image
 import io
 import cv2
 import numpy as np
 import streamlit as st
+from google.cloud import vision
+from PIL import Image
 
-# Set the environment variable for Google Application Credentials
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'/Users/mitwadevelopment/Documents/GitHub/SplitSee/splitsee.json'
+# Ensure the GOOGLE_APPLICATION_CREDENTIALS environment variable is set
+credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+if credentials_path is None:
+    st.error("The GOOGLE_APPLICATION_CREDENTIALS environment variable is not set.")
+else:
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
 
 # Set up Google Cloud Vision client
 client = vision.ImageAnnotatorClient()
