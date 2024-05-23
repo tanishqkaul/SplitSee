@@ -4,17 +4,20 @@ import cv2
 import numpy as np
 import streamlit as st
 from google.cloud import vision
+from google.oauth2 import service_account
 from PIL import Image
 
-# Ensure the GOOGLE_APPLICATION_CREDENTIALS environment variable is set
-credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-if credentials_path is None:
-    st.error("The GOOGLE_APPLICATION_CREDENTIALS environment variable is not set.")
+# Ensure the GOOGLE_APPLICATION_CREDENTIALS secret is set
+google_credentials = st.secrets["GOOGLE_APPLICATION_CREDENTIALS"]
+
+if google_credentials is None:
+    st.error("The GOOGLE_APPLICATION_CREDENTIALS secret is not set.")
 else:
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+    # Set up credentials using the service account info from st.secrets
+    credentials = service_account.Credentials.from_service_account_info(google_credentials)
 
 # Set up Google Cloud Vision client
-client = vision.ImageAnnotatorClient()
+client = vision.ImageAnnotatorClient(credentials=credentials)
 
 def analyze_image(uploaded_image):
     """Analyze the uploaded image using Google Vision API to detect texts.
